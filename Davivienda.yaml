@@ -1,0 +1,416 @@
+swagger: "2.0"
+info:
+  description: "El sistema de administración de QR debe disponibilizar las siguientes API’s.  Esta API debe permitir la generación de un QR con la estructura definida para los QR Interoperables."
+  version: "1.0.0"
+  title: "Sistema de Administración QR"
+  
+
+tags:
+- name: "QR"
+schemes:
+- "https"
+- "http"
+paths:
+  /davivienda/admin-qr/v1/generacionqr:
+    post:
+      tags:
+      - "QR"
+      summary: "Generación Qr con estándar Interoperable"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        schema:
+          $ref: "#/definitions/generatorIn"
+      responses:
+        "201":
+          description: "succesfull operation"
+          
+          schema:
+              $ref: "#/definitions/generatorOut"
+        
+        "400":
+          description: "Invalid input"
+          
+          schema:
+              $ref: "#/definitions/generatorErrorOut"
+      
+      
+  /davivienda/admin-qr/v1/validacionqr:
+    post:
+      tags:
+      - "QR"
+      summary: "Validación QR con estándar Interoperable "
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        schema:
+          $ref: "#/definitions/validateIn"
+      responses:
+        "201":
+          description: "succesfull operation"
+          
+          schema:
+              $ref: "#/definitions/validateOut"
+        
+        "400":
+          description: "Invalid input"
+          
+          schema:
+              $ref: "#/definitions/validateErrorOut"
+  
+  /daviplata/admin-qr/v1/generacionqr:
+    post:
+      tags:
+      - "QR"
+      summary: "Generación QR con estándar Interoperable "
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        schema:
+          $ref: "#/definitions/generatorIn"
+      responses:
+        "201":
+          description: "succesfull operation"
+          
+          schema:
+              $ref: "#/definitions/generatorOut"
+        
+        "400":
+          description: "Invalid input"
+          
+          schema:
+              $ref: "#/definitions/generatorErrorOut"
+  
+  /daviplata/admin-qr/v1/validacionqr:
+    post:
+      tags:
+      - "QR"
+      summary: "Validación QR con estándar Interoperable "
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        schema:
+          $ref: "#/definitions/validateIn"
+      responses:
+        "201":
+          description: "succesfull operation"
+          
+          schema:
+              $ref: "#/definitions/validateOut"
+        
+        "400":
+          description: "Invalid input"
+          
+          schema:
+              $ref: "#/definitions/validateErrorOut"
+  
+definitions:
+    generatorIn:
+      type: object
+      properties:
+        generacionqr:
+          type: object
+          properties:
+            encabezado:
+              type: object
+              properties:
+                idTrazabilidad:
+                  type: integer
+                  description: ID de Trazabilidad
+                idCanal:
+                  type: integer
+                  description: ID de Canal
+                idConsumidor:
+                  type: string
+                  description: ID de Consumidor
+                ipCliente:
+                  type: integer
+                  description: IP de Cliente
+                codigoPais:
+                  type: string
+                  description: Codigo Pais
+            datosqr:
+              type: object
+              properties: 
+                cliente:
+                  type: object
+                  properties:
+                    tipoId:
+                      type: string
+                      description: Tipo de ID
+                    numeroId:
+                      type: integer
+                      description: Numero de ID
+                descripcionQr:
+                  type: string
+                montoTransferencia:
+                  type: object
+                  properties:
+                    valor:
+                      type: integer
+                      description: Valor
+                    moneda:
+                      type: string
+                      description: Moneda
+                cuentaDestinoFondos:
+                  type: object
+                  properties:
+                    tipoCuenta:
+                      type: string
+                      description: Tipo de Cuenta}
+                    numCuenta:
+                      type: integer
+                      description: Numero de la Cuenta
+    
+    generatorOut:
+      type: object
+      properties:
+        generacionqr:
+          type: object
+          properties:
+            encabezado:
+              type: object
+              properties:
+                reultadotransaccion:
+                  type: object
+                  properties:
+                    caracterAceptacion:
+                      type: string
+                      description: Caracter de Aceptacion
+                    idTrazabilidad:
+                      type: string
+                      description: ID de Trazabilidad  
+                    fecOperacion:
+                      type: string
+                      description: Fec de Operacion
+            datosqr:
+              type: object
+              properties:
+                estructuraQr:
+                  type: object
+                  properties:
+                    typeQr:
+                      type: string
+                      description: Tipo de Qr
+                    versionQr:
+                      type: integer
+                      description: Version Qr
+                    bankIdQr:
+                      type: integer
+                      description: ID Qr de Banco
+                    creatorNameQr:
+                      type: string
+                      description: Creador de Nombre de Qr
+                    amountsQr:
+                      type: integer
+                      description: Amounts Qr
+                    integrity:
+                      type: integer
+                      description: Integridad
+    
+    validateIn:
+      type: object
+      properties:
+        validacionqr:
+          type: object
+          properties:
+            encabezado:
+              type: object
+              properties:
+                idTrazabilidad:
+                  type: integer
+                  description: ID de Trazabilidad
+                idCanal:
+                  type: integer
+                  description: ID de Canal
+                idConsumidor:
+                  type: string
+                  description: ID de Consumidor
+                ipCliente:
+                  type: integer
+                  description: IP de Cliente
+                codigoPais:
+                  type: string
+                  description: Codigo Pais
+            datosqr:
+              type: object
+              properties: 
+                cliente:
+                  type: object
+                  properties:
+                    tipoId:
+                      type: string
+                      description: Tipo de ID
+                    numeroId:
+                      type: integer
+                      description: Numero de ID
+                estructuraQr:
+                  type: object
+                  properties:
+                    typeQr:
+                      type: string
+                      description: Tipo de Qr
+                    versionQr:
+                      type: integer
+                      description: Version Qr
+                    bankIdQr:
+                      type: integer
+                      description: ID Qr de Banco
+                    creatorNameQr:
+                      type: string
+                      description: Creador de Nombre de Qr
+                    amountsQr:
+                      type: integer
+                      description: Amounts Qr
+                    integrity:
+                      type: integer
+                      description: Integridad      
+            
+                
+                  
+    validateOut:
+      type: object
+      properties:
+        validacionqr:
+          type: object
+          properties:
+            encabezado:
+              type: object
+              properties:
+                reultadotransaccion:
+                  type: object
+                  properties:
+                    caracterAceptacion:
+                      type: string
+                      description: Caracter de Aceptacion
+                    idTrazabilidad:
+                      type: string
+                      description: ID de Trazabilidad  
+                    fecOperacion:
+                      type: string
+                      description: Fec de Operacion
+            datosqr:
+              type: object
+              properties: 
+                cliente:
+                  type: object
+                  properties:
+                    tipoId:
+                      type: integer
+                      description: Tipo de ID
+                    numeroId:
+                      type: integer
+                descripcionQr:
+                  type: string
+                montoTransferencia:
+                  type: object
+                  properties:
+                    valor:
+                      type: integer
+                      description: Valor
+                    moneda:
+                      type: string
+                      description: Moneda
+                cuentaDestinoFondos:
+                  type: object
+                  properties:
+                    tipoCuenta:
+                      type: string
+                      description: Tipo de Cuenta}
+                    numCuenta:
+                      type: integer
+                      description: Numero de la Cuenta        
+                      
+    validateErrorOut:
+      type: object
+      properties:
+        validacionqr:
+          type: object
+          properties:
+            encabezado:
+              type: object
+              properties:
+                resultadoTransaccion:
+                  type: object
+                  properties:
+                    caracterAceptacion:
+                      type: string
+                      description: "A"
+                    idTrazabilidad:
+                      type: integer
+                      description: ID de Trazabilidad  
+                    fecOperacion:
+                      type: integer
+                      description: Fec de Operacion                  
+            error:
+              type: object
+              properties:
+                codMsjRepueta:
+                  type: integer
+                  description: Codigo Mensaje Respuesta
+                msjRespuesta:
+                  type: string
+                  description: Problema Tecnico Generando el codigo hash
+                  
+    generatorErrorOut:
+      type: object
+      properties:
+        generacionqr:
+          type: object
+          properties:
+            contextoRespuesta:
+              type: object
+              properties:
+                encabezado:
+                  type: object
+                  properties:
+                    caracacterAceptacion:
+                      type: string
+                      description: "A"
+                    idTrazabilidad:
+                      type: integer
+                      description: ID de Trazabilidad  
+                    fecOperacion:
+                      type: integer
+                      description: Fec de Operacion                  
+            error:
+              type: object
+              properties:
+                codMsjRepueta:
+                  type: integer
+                  description: Codigo Mensaje Respuesta
+                msjRespuesta:
+                  type: string
+                  description: Problema Tecnico Generando el codigo hash              
